@@ -1,0 +1,26 @@
+Các công việc cần thực hiện trên server:
+- Đồng bộ 1 lần nữa tất cả các script
+- Sửa lại localhost thành hungphongbk.ddns.net trên trang webapp sau khi
+update thành công
+- Cài đặt thêm package googleapi trên nodejs (hungphongbk.ddns.net)
+- Python: không chỉnh sửa gì thêm
+
+* 3/4/2015:
+- Hạ phiên bản jsdom xuống còn 3.1.2 (do 4.0 trở lên chỉ tương thích với io.js)
+
+* Lệnh kết nối đến server:
+ssh -i hungphongbk-keypair0.pem ubuntu@52.74.29.208
+
+* 4/4/2015:
+- Viết lại code theo đúng nguyên lý mô hình 3 lớp
+    + proxy (bknoti.utility): giao tiếp giữa aao và csdl trung gian
+    + BKNOTIDB (bknoti.utility): csdl trung gian chứa các thông tin cần thiết
+     lưu trữ lại của sinh viên (dữ liệu khi được yêu cầu nhưng không tồn tại
+     có thể lấy thông qua proxy và lưu lại)
+    + GOOGLEAPIS (chuyển từ bknoti sang bknoti.utility): lấy dữ liệu từ
+    BKNOTIDB để thực hiện 1 số tiện ích như đồng bộ với GG calendar, ...
+    + BKUTIL (bknoti): gồm các rest api giao tiếp với người dùng, lấy dữ liệu
+     từ BKNOTIDB
+- Mở rộng chức năng
+    + GOOGLEAPIS đồng bộ cả lịch thi
+- Thay đổi trang webapp: sử dụng mobile angular js (chưa học -_-)
