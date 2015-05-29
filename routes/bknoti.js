@@ -31,10 +31,10 @@ var GOOGLEAPIS=(function(){
     };
     var oauth2Client=new OAuth2Client(PARAMS.CLIENT_ID,PARAMS.CLIENT_SECRET,PARAMS.REDIRECT_URL);
     var cls=function(){ };
-    cls.prototype.getGoogleApiClientSecret=function(req,res){
+    function getGoogleApiClientSecret(req,res){
         util.success(res,PARAMS);
-    };
-    cls.prototype.getAuthToken=function(req,res){
+    }
+    function getAuthToken(req,res){
         if (typeof req.query['code'] === 'undefined') {
             var url = oauth2Client.generateAuthUrl({
                 access_type: 'offline',
@@ -60,13 +60,13 @@ var GOOGLEAPIS=(function(){
                 else util.success(res,{token:token});
             });
         }
-    };
+    }
     cls.prototype.authorized=function(req,res){
 
     };
     var mappings={
-        'clientsecret':cls.prototype.getGoogleApiClientSecret,
-        'authUrl':cls.prototype.getAuthToken
+        'clientsecret': getGoogleApiClientSecret,
+        'authUrl': getAuthToken
     };
     cls.prototype.mapping=function(req,res){
         var type=req.params['type'];
@@ -247,6 +247,7 @@ var BKUTIL=(function(db){
     cls.prototype.downloadExamList=function(stu,req,res){
         console.log(stu);
         var dfd=new deferred();
+        console.log('what the duck?');
         search('xem_lt')
             .then(downloadSemesterList)
             .then(function(sems){
